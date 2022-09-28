@@ -1,8 +1,17 @@
+import {Container, Row, Col} from 'react-bootstrap';
 import "./footer.styles.scss";
 
 const Footer = () => {
     return (
-        <div>Footer</div>
+        <footer>
+            <Container>
+                <Row>
+                    <Col className="text-center py-3">
+                        Copyright &copy; FalconStore
+                    </Col>
+                </Row>
+            </Container>
+        </footer>
     )
 }
 
