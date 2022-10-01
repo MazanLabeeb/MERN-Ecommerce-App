@@ -1,0 +1,17 @@
+.rating-container{
+    display: flex;
+    flex-direction: row;
+    gap: 0.4rem;
+    align-items: center;
+    
+
+
+    .rating-stars-container{
+        color: #ffa534;
+        margin-bottom: 0.3rem;
+
+        display: flex;
+        flex-direction: row;
+        gap: 0.1rem;
+    }
+}
