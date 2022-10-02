@@ -1,9 +1,7 @@
 import "./home.styles.scss";
 import products from "../../products";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import ProductCard from "../../components/product-card/product-card.component";
-import Header from "../../components/header/header.component";
-import Footer from "../../components/footer/footer.component";
 
 
 const Home = () => {
