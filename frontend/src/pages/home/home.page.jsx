@@ -9,23 +9,15 @@ import Footer from "../../components/footer/footer.component";
 const Home = () => {
     return (
         <>
-            <Header />
-
-            <main>
-                <Container>
-                    <Row>
-                        {products.map((products) => {
-                            return (
-                                <Col sm={12} md={6} lg={4} xl={3} key={products._id} >
-                                    <ProductCard products={products} />
-                                </Col>
-                            );
-                        })}
-                    </Row>
-                </Container>
-            </main>
-
-            <Footer />
+            <Row>
+                {products.map((products) => {
+                    return (
+                        <Col sm={12} md={6} lg={4} xl={3} key={products._id} >
+                            <ProductCard products={products} />
+                        </Col>
+                    );
+                })}
+            </Row>
         </>
     );
 }
