@@ -1,22 +1,22 @@
-import { Container } from "react-bootstrap";
-import Footer from "./components/footer/footer.component";
-import Header from "./components/header/header.component";
-import Home from "./pages/home/home.component";
+import Home from "./pages/home/home.page";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import ProductPage from "./pages/products/product.page";
+import PageNotFound from "./pages/PageNotFound/PageNotFound.pages";
 
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route index element={<Home />} />
+          <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/*" element={<PageNotFound />} />
 
-        <Container>
-          <Home />
-        </Container>
-      </main>
+        </Route>
 
-      <Footer />
-    </>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
