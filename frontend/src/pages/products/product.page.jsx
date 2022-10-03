@@ -1,12 +1,25 @@
 import { useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import products from "../../products";
 import { Link } from "react-router-dom";
 import Rating from "../../components/rating/rating.component";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ProductPage = () => {
     const { id } = useParams();
-    const { name, image, rating, numReviews, price, description, countInStock } = products.find(prod => prod._id === id);
+
+    const [products, setProducts] = useState({}); 
+
+    useEffect(
+        ()=>{
+            fetch(`/api/products/${id}`)
+            .then(response=>response.json())
+            .then(result=>setProducts(result))
+            .catch(err=>console.log(err));
+        },[]
+    );
+
+    const { name, image, rating, numReviews, price, description, countInStock } = products;
 
 
 

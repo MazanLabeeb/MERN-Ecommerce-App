@@ -8,12 +8,12 @@ app.get('/', (req, res)=>{
     res.send("Forbidden");
 })
 
-app.get('/products', (req, res)=> {
+app.get('/api/products', (req, res)=> {
     res.json(products);
 })
 
-app.get('/products/:id', (req, res)=> {
-    const filterProduct = products.filter(id=> id._id=== req.params.id );
+app.get('/api/products/:id', (req, res)=> {
+    const filterProduct = products.filter(id=> id._id=== req.params.id )[0];
     res.json(filterProduct);
 })
 
