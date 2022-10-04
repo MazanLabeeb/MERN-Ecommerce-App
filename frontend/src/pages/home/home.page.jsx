@@ -1,10 +1,28 @@
 import "./home.styles.scss";
-import products from "../../products";
 import { Col, Row } from "react-bootstrap";
 import ProductCard from "../../components/product-card/product-card.component";
+import { useEffect } from "react";
+import { useState } from "react";
 
 
 const Home = () => {
+    const [products, setProducts] = useState([]);
+    useEffect( 
+        () => {
+            fetch("/api/products")
+            .then(response => response.json())
+            .then(result => {
+                setProducts(result);
+            })
+            .catch(err=>{
+                console.log(err);
+            })
+
+        },
+        []
+    );
+
+
     return (
         <>
             <Row>
