@@ -39,8 +39,8 @@ app.use((err, req, res, next)=>{
 const PORT = process.env.PORT || 8080;
 
 const onStartHttp = (message) => {
-    console.log(`${message} \n✅ Server Started Successfully`.green.bold);
-    console.log(`http://localhost:${PORT}\nNode Environment: ${process.env.NODE_ENV}`.brightYellow);
+    console.log(`${message} \n✅ Server Status: Running`.green.bold);
+    console.log(`http://localhost:${PORT}\nNode Environment: ${process.env.NODE_ENV}`.yellow);
 }
 
 connectDB().then((message)=>{
