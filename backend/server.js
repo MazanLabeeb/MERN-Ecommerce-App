@@ -1,8 +1,11 @@
-require("dotenv").config();
-const express = require("express");
+import dotenv from "dotenv";
+dotenv.config();
+
+import express from "express";
 const app = new express();
-const PORT = process.env.PORT || 8080;
-const {products} = require("./data/products");
+
+import products from "./data/products.js";
+
 
 // ROUTES
 app.get('/', (req, res)=>{
@@ -29,6 +32,9 @@ app.use((err, req, res, next)=>{
 
 
 
+
+
+const PORT = process.env.PORT || 8080;
 
 const onStartHttp = () => {
     console.log(`Server Started: http://localhost:${PORT}`,"\n", "Node Environment: ", process.env.NODE_ENV);
