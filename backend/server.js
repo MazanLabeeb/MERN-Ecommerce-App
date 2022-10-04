@@ -4,6 +4,7 @@ dotenv.config();
 import express from "express";
 const app = new express();
 
+import colors from "colors";
 import products from "./data/products.js";
 import connectDB from "./config/db.js";
 
@@ -38,11 +39,12 @@ app.use((err, req, res, next)=>{
 const PORT = process.env.PORT || 8080;
 
 const onStartHttp = (message) => {
-    console.log(`${message}\n✅ Server Started Successfully \n http://localhost:${PORT}`,"\n", "Node Environment: ", process.env.NODE_ENV);
+    console.log(`${message} \n✅ Server Started Successfully`.green.bold);
+    console.log(`http://localhost:${PORT}\nNode Environment: ${process.env.NODE_ENV}`.brightYellow);
 }
 
 connectDB().then((message)=>{
     app.listen( PORT, onStartHttp(message) );
 }).catch(error=>{
-    console.error(error);
+    console.error(error.red.bold);
 })
