@@ -5,6 +5,7 @@ import express from "express";
 const app = new express();
 
 import products from "./data/products.js";
+import connectDB from "./config/db.js";
 
 
 // ROUTES
@@ -36,7 +37,12 @@ app.use((err, req, res, next)=>{
 
 const PORT = process.env.PORT || 8080;
 
-const onStartHttp = () => {
-    console.log(`Server Started: http://localhost:${PORT}`,"\n", "Node Environment: ", process.env.NODE_ENV);
+const onStartHttp = (message) => {
+    console.log(`${message}\n✅ Server Started Successfully \n http://localhost:${PORT}`,"\n", "Node Environment: ", process.env.NODE_ENV);
 }
-app.listen( PORT, onStartHttp );
+
+connectDB().then((message)=>{
+    app.listen( PORT, onStartHttp(message) );
+}).catch(error=>{
+    console.error(error);
+})
