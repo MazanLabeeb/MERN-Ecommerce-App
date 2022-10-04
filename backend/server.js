@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = new express();
 const PORT = process.env.PORT || 8080;
@@ -30,6 +31,6 @@ app.use((err, req, res, next)=>{
 
 
 const onStartHttp = () => {
-    console.log(`Server Started: http://localhost:${PORT}`);
+    console.log(`Server Started: http://localhost:${PORT}`,"\n", "Node Environment: ", process.env.NODE_ENV);
 }
 app.listen( PORT, onStartHttp );

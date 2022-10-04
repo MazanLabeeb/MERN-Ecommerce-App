@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.1"
   },
   "name": "mern",
@@ -7,10 +8,17 @@
   "description": "Online Ecommerce Store",
   "main": "server.js",
   "scripts": {
-    "start": "node backend/server"
+    "start": "node backend/server",
+    "backend": "nodemon backend/server",
+    "frontend": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" "
   },
   "repository": "https://github.com/MazanLabeeb/MERN-Ecommerce-App.git",
   "author": "mazanlabeeb <mazanlabeeb95@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.20"
+  }
 }
