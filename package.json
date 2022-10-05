@@ -1,6 +1,7 @@
 {
   "type": "module",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
@@ -14,7 +15,9 @@
     "start": "node backend/server",
     "backend": "nodemon backend/server",
     "frontend": "npm start --prefix frontend",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\" "
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\" ",
+    "data:import": "node backend/seeder",
+    "data:destroy": "node backend/seeder -d"
   },
   "repository": "https://github.com/MazanLabeeb/MERN-Ecommerce-App.git",
   "author": "mazanlabeeb <mazanlabeeb95@gmail.com>",
