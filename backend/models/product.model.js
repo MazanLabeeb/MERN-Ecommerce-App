@@ -25,6 +25,10 @@ const productSchema = new Schema({
         required:true,
         ref: 'User'
     },
+    name: {
+        type: String,
+        required: true
+    },
     image: {
         type: String, 
         required: true

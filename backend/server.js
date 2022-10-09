@@ -5,34 +5,24 @@ import express from "express";
 const app = new express();
 
 import colors from "colors";
-import products from "./data/products.js";
 import connectDB from "./config/db.js";
+import router from "./routes/products.routes.js";
+import { customErrorHandler, notFound } from "./middlewares/error.middleware.js";
 
 
 // ROUTES
-app.get('/', (req, res)=>{
+app.use("/api/products", router);
+app.use("/api/products/:id", router);
+
+app.get('/', (req, res) => {
     res.send("Forbidden");
 })
 
-app.get('/api/products', (req, res)=> {
-    res.json(products);
-})
-
-app.get('/api/products/:id', (req, res)=> {
-    const filterProduct = products.filter(id=> id._id=== req.params.id )[0];
-    res.json(filterProduct);
-})
 
 
-app.use((req, res)=>{
-    res.send("Error 404! Page Not Found");
-})
 
-app.use((err, req, res, next)=>{
-    res.status(500).send(`Error 500! Something went wrong.<br><b>Error: </b>${err.stack}`);
-})
-
-
+app.use(notFound);
+app.use(customErrorHandler);
 
 
 
@@ -43,8 +33,8 @@ const onStartHttp = (message) => {
     console.log(`http://localhost:${PORT}\nNode Environment: ${process.env.NODE_ENV}`.yellow);
 }
 
-connectDB().then((message)=>{
-    app.listen( PORT, onStartHttp(message) );
-}).catch(error=>{
+connectDB().then((message) => {
+    app.listen(PORT, onStartHttp(message));
+}).catch(error => {
     console.error(error.red.bold);
 })

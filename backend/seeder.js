@@ -30,9 +30,7 @@ const importData = async () => {
         const adminUser = createdUsers[0]._id;
 
 
-        const sampleProducts = products.map(products => {
-            return { ...products, user: adminUser }
-        })
+        const sampleProducts = products.map(products =>  ({ ...products, user: adminUser }) );
 
         await Product.insertMany(sampleProducts);
 
@@ -59,6 +57,7 @@ const destroyData = async () => {
         process.exit(1);
     }
 }
+
 
 if(process.argv[2] === '-d'){
     destroyData()
