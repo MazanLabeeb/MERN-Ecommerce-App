@@ -1,7 +1,8 @@
 import {PRODUCTS_LIST_REQUEST, PRODUCTS_LIST_SUCCESS, PRODUCTS_LIST_FAILURE} from "./products.types";
 
 const initialState = {
-    products: []
+    products: [],
+    loading: true
 }
 
 export const productReducer = (state = initialState, action = {}) => {

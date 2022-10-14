@@ -6,7 +6,7 @@ import thunk from "redux-thunk";
 
 
 
-const middlewares = [process.env.NODE_ENV === "development" && logger, thunk].filter(Boolean);
+const middlewares = [process.env.NODE_ENV === "developmen" && logger, thunk].filter(Boolean);
 
 const ChromeDevTools = (process.env.NODE_ENV !== 'production' && window && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 const enhancedCompose = ChromeDevTools(applyMiddleware(...middlewares));

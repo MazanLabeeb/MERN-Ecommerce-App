@@ -1,5 +1,6 @@
 import express from "express";
 import Product from "../models/product.model.js";
+import delay from "./../utils/delay.utils.js";
 
 const router = express.Router();
 
@@ -7,7 +8,9 @@ const router = express.Router();
 // @desc fetch all the products
 // @access Public
 
-router.get('/', async (req, res)=> {
+
+
+router.get('/', async (req, res, next)=> {
     let products = await Product.find({});
     res.json(products);
 })
