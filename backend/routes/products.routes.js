@@ -22,7 +22,7 @@ router.get('/', async (req, res, next)=> {
 // @access Public
 router.get('/:id', async (req, res, next)=> {
     Product.findById(req.params.id).exec()
-    .then(product => {
+    .then(async (product) => {
         product ? res.json(product) : res.status(404).json({message: "Product Not Found"});
     })
     .catch(err => {
