@@ -2,6 +2,16 @@ import { applyMiddleware, compose, createStore } from "redux";
 import logger from "redux-logger";
 import { rootReducer } from "./rootReducer";
 import thunk from "redux-thunk";
+import { persistStore, persistReducer } from 'redux-persist';
+
+
+import storage from "redux-persist/lib/storage";
+	const persistConfig = {
+    key:"root",
+    storage,
+    blacklist: ["productsStore", "productDetailStore"]
+}
+
 
 
 
@@ -14,4 +24,7 @@ const enhancedCompose = ChromeDevTools(applyMiddleware(...middlewares));
 
 const initialState = {};
 
-export const store = createStore(rootReducer, initialState, enhancedCompose);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const store = createStore(persistedReducer, initialState, enhancedCompose);
+
+export const persistor = persistStore(store);

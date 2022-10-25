@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Card, Button, ButtonGroup } from 'react-bootstrap';
+import { Row, Col, Image, ListGroup, Card, Button, ButtonGroup, Toast } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 import Rating from "../../components/rating/rating.component";
 import { useEffect, useState } from "react";
@@ -8,6 +8,10 @@ import productDetailAction from "../../store/product-detail/product-detail.actio
 import CustomSpinner from "./../../components/spinner/spinner.component";
 import CustomError from "./../../components/error/error.component";
 import { ImMinus, ImPlus } from "react-icons/im"
+import { ADD_TO_CART } from "../../store/cart/cart.types";
+import CartAction from "../../store/cart/cart.action";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ProductPage = () => {
     const ADD = 'ADD';
@@ -25,12 +29,13 @@ const ProductPage = () => {
         }, []
     );
 
-    const { _id,  name, image, rating, numReviews, price, description, countInStock } = product;
+    const { _id, name, image, rating, numReviews, price, description, countInStock } = product;
 
     let disableAdd = false;
     let disableMinus = false;
     if (qty <= 1) disableMinus = true;
     if (qty >= countInStock) disableAdd = true;
+
 
     const qtyHandler = (type) => {
         switch (type) {
@@ -44,8 +49,24 @@ const ProductPage = () => {
 
     }
 
+    const addToCartHandler = () => {
+        dispatch(CartAction({
+            type: ADD_TO_CART,
+            payload: {
+                ...product,
+                qty
+            }
+        }))
+
+        toast("Item(s) added to Cart");
+
+    }
+
     const navigate = useNavigate();
-    const addToCartHandler = () => navigate(`/cart/${_id}?qty=${qty}`)
+    const CheckoutHandler = () => {
+        navigate(`/cart/`)
+
+    }
 
     return (
         <>
@@ -59,6 +80,7 @@ const ProductPage = () => {
                         <Link className="btn btn-light my-3 " to={"/"}>
                             Go Back
                         </Link>
+
                         <Row>
                             <Col md={6} lg={9}>
                                 <Row>
@@ -76,10 +98,10 @@ const ProductPage = () => {
                                                 <Rating rating={rating} numReviews={numReviews} />
                                             </ListGroup.Item>
                                             <ListGroup.Item>
-                                                Price: ${price}
+                                                <strong>Price:</strong> ${price}
                                             </ListGroup.Item>
                                             <ListGroup.Item>
-                                                Description: {description}
+                                                <strong>Description:</strong> {description}
                                             </ListGroup.Item>
                                         </ListGroup>
                                     </Col>
@@ -104,7 +126,7 @@ const ProductPage = () => {
                                         </Row>
                                     </ListGroup.Item>
 
-                                    {(countInStock > 0) && 
+                                    {(countInStock > 0) &&
                                         <ListGroup.Item>
                                             <Row>
                                                 <ButtonGroup size="sm" >
@@ -115,16 +137,27 @@ const ProductPage = () => {
                                             </Row>
                                         </ListGroup.Item>
                                     }
+
                                     <ListGroup.Item>
-                                        <Button className="btn-block border-radius-none" type='button' disabled={(countInStock > 0) ? false : true} onClick={addToCartHandler}>
+
+
+                                        <Button className="btn-block border-radius-none mb-2" type='button' disabled={(countInStock > 0) ? false : true} onClick={addToCartHandler}>
                                             Add To Cart
                                         </Button>
+
+                                        <Button variant="success" className="btn-block border-radius-none" type='button' disabled={(countInStock > 0) ? false : true} onClick={CheckoutHandler}>
+                                            Checkout
+                                        </Button>
+
                                     </ListGroup.Item>
                                 </ListGroup>
+
                             </Col>
                         </Row>
+
                     </>}
 
+            <ToastContainer className={"p-2"} />
         </>
     );
 }
